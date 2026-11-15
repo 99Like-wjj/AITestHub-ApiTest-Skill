@@ -1,0 +1,59 @@
+{
+  "kind": "API",
+  "scenarioId": "11111111-1111-4111-8111-111111111111",
+  "title": "查询已存在合成订单并核对业务状态",
+  "testPoint": "查询已知订单时返回本次请求对应的订单及已确认状态",
+  "preconditions": [
+    "用户已选择明确的平台项目、API场景和测试环境",
+    "所选环境具有orders服务地址并已存在demo-order-001订单，状态为created"
+  ],
+  "expected": "返回HTTP200，JSON的id等于请求orderId且state为created",
+  "basisRefs": [
+    {
+      "kind": "explicitStatement",
+      "locator": "synthetic-api.md#返回与业务预期",
+      "description": "合成接口说明的请求、返回预期和只读范围",
+      "readability": "readable"
+    }
+  ],
+  "dslVersion": "ath.api-case.v1",
+  "variables": {
+    "orderId": "demo-order-001"
+  },
+  "steps": [
+    {
+      "stepId": "read-order",
+      "name": "按固定orderId读取订单",
+      "method": "GET",
+      "url": "{{env.baseUrls.orders}}/orders/{{case.orderId}}",
+      "query": [],
+      "headers": [{ "name": "accept", "value": "application/json" }],
+      "body": { "format": "none" },
+      "extractors": [],
+      "assertions": [
+        {
+          "id": "http-status",
+          "source": "status",
+          "operator": "equals",
+          "expected": 200
+        },
+        {
+          "id": "order-identity",
+          "source": "json",
+          "path": "id",
+          "operator": "equals",
+          "expected": "{{case.orderId}}"
+        },
+        {
+          "id": "order-state",
+          "source": "json",
+          "path": "state",
+          "operator": "equals",
+          "expected": "created"
+        }
+      ],
+      "timeoutMs": 5000
+    }
+  ],
+  "cleanup": { "mode": "none" }
+}

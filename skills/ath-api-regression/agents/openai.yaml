@@ -1,0 +1,6 @@
+interface:
+  display_name: "AITestHub 接口测试"
+  short_description: "从接口Markdown生成和维护平台原生API用例，并按明确指令使用平台调试"
+  default_prompt: "使用 $ath-api-regression，根据我提供的接口Markdown生成或维护指定范围的平台API用例，说明缺口；需要调试时等待我的明确指令。"
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,13 @@
+AGENTS.local.md
+engineering/
+tests/
+test-results/
+.local-build/
+.private/
+workspaces/
+dist/
+node_modules/
+.env*
+*.log
+*.zip
+*.tgz
