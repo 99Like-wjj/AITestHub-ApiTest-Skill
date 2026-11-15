@@ -1,0 +1,22 @@
+{
+  "name": "@aitesthub/api-test-skill",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "packageManager": "pnpm@11.28.11",
+  "engines": {
+    "node": "24.19.0",
+    "pnpm": "11.28.11"
+  },
+  "scripts": {
+    "format:check": "prettier --check \"scripts/*.mjs\" package.json .prettierrc.json README.md AGENTS.md CONTRIBUTING.md \"docs/development/*.md\" skills/ath-api-regression/manifest.json skills/ath-api-regression/host-adapters/platform.md",
+    "quality:check": "pnpm format:check && node scripts/validate-skill.mjs",
+    "skill:validate": "node scripts/validate-skill.mjs",
+    "build": "node scripts/package-skill.mjs",
+    "package:check": "node scripts/package-skill.mjs --check"
+  },
+  "devDependencies": {
+    "prettier": "3.10.0"
+  }
+}

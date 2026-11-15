@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "ath.skill-manifest.v1",
+  "skillId": "ath-api-regression",
+  "skillVersion": "0.1.1",
+  "ruleVersion": "0.1.1",
+  "license": "MIT",
+  "compatibleContracts": ["ath.contracts.v1", "ath.api-case.v1"],
+  "targets": ["local", "platform-content"],
+  "sections": {
+    "entry": "SKILL.md",
+    "generation": "references/generation.md",
+    "native-api": "references/native-api.md",
+    "maintenance-and-recovery": "references/maintenance-and-recovery.md",
+    "platform-debug": "references/platform-debug.md",
+    "platform-adapter": "host-adapters/platform.md"
+  }
+}
