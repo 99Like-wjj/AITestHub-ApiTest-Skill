@@ -1,8 +1,8 @@
 {
   "schemaVersion": "ath.skill-manifest.v1",
   "skillId": "ath-api-regression",
-  "skillVersion": "0.1.2",
-  "ruleVersion": "0.1.2",
+  "skillVersion": "0.1.5",
+  "ruleVersion": "0.1.5",
   "license": "MIT",
   "compatibleContracts": ["ath.contracts.v1", "ath.api-case.v1"],
   "targets": ["local", "platform-content"],

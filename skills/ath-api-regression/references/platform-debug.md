@@ -4,6 +4,8 @@
 
 使用宿主实际发现的工具`ath_api_runs`，选择其`op: "debug-start"`，按当前Schema提供commandId、environmentId、productBuild、sourceCaseId/sourceCaseRevisionId、必要场景修订与完整API content。新增未保存草稿的sourceCaseId和sourceCaseRevisionId可为null，但scenarioId仍须是该项目实际API场景，不虚构来源批准。
 
+包含 `dataRows` 时，用 `dataRowId` 指定本轮要调试的实际数据行，保留该行和固定准备修订与调试回执的关联。其它数据行的运行和平台回归资格分别以真实回执为准。
+
 发起前核对这次的真实内容和环境/用途/副作用范围，按现有平台规则处理清理和确认。调试应交由平台Worker执行；不能转用本地curl、Python、浏览器fetch、直连数据库或另造运行器补齐能力。后台SQL/脚本也不能由本地AI代跑。
 
 先保管原commandId和固定参数，再取得原runId、draftHash及debugResultUrl等真实回执。调试先保留独立诊断、候选内容与原基准。

@@ -16,15 +16,20 @@
 | `ath_api_runs`                                       | debug-start/debug-trace、attempt-detail/events/status；用户明确要求后由平台调试          |
 | `ath_operation_status`                               | 按原operation/key或commandId查真实结果，不能视404为未执行                                |
 
-不调用目录中不存在的prepare/commit工具。平台其他页面能力可通过当前已开放且有权的工具协助处理，但不借S04扩大到项目成员、个人Key或平台全局管理。
+平台其他页面能力按当前目录、项目权限和用户任务范围办理。
 
 ## API用例内容
 
-当前原生内容使用`kind=API`、`dslVersion=ath.api-case.v1`，包括真实`scenarioId`、title、testPoint、preconditions、expected、basisRefs、variables、steps和cleanup。用例外层归属、revisionId、rowVersion、批准状态由平台管理，不能塞进content中冒充正式身份。
+当前原生内容使用`kind=API`、`dslVersion=ath.api-case.v1`，包括真实`scenarioId`、title、testPoint、preconditions、expected、basisRefs、variables、steps和cleanup。按需提供`dataRows`和`preparations`。用例外层归属、revisionId、rowVersion和批准状态由平台管理。
 
 每个HTTP步骤包含：stepId、name、method、url、query、headers、body、extractors、assertions；purposeRef/authProfileRef及preScript/postScript/timeoutMs按当前Schema使用。method为GET/POST/PUT/PATCH/DELETE/HEAD/OPTIONS。body为none/json/text/form，其中form是URL编码表单，不是multipart文件上传。
 
 模板上下文常用`{{env.baseUrls.服务名}}`、`{{env.变量}}`、`{{case.变量}}`和`{{extract.变量}}`。认证交给purposeRef/authProfileRef和平台绑定；不能将实际Token复制进headers或variables。
+
+登录步骤可用响应提取器声明 `name`、`source`、`path`、`required` 及可选 `sensitive`。令牌和其他秘密设置 `sensitive: true`，后续步骤将 `{{extract.token}}` 用于实际需要的参数或请求头。提取值在当前用例的数据行内使用，环境变量是项目环境配置。轨迹仅使用平台安全投影，资料和清理记录中也保留引用。
+
+- `dataRows` 每行包含 `id`、`name`、`values`，标识必须唯一。平台为每行独立展开一次执行，`values` 覆盖同名 `variables`。固定计划仍引用逻辑用例，执行时固定实际修订和数据行。
+- `preparations` 每项包含项目内可直接执行的 `caseId`、固定 `revisionId` 和 `parameters`。平台按引用顺序先执行准备请求，再执行本用例请求。参数覆盖准备修订内同名变量，本用例和数据行可进一步覆盖。记录真实依赖和原修订。可复用准备请求适合登录或建数据，主用例明确安排本轮必要的清理。
 
 提取来源为json/header/status/body；断言来源为status/json/header/body/variable，运算符为equals/notEquals/contains/exists/matches/greaterThan/lessThan。`exists`以外需要expected，json/header/variable需要路径。路径支持平台的点路径/数组下标，不能声称完整JSONPath过滤语法已支持。至少保留有业务依据的响应断言，不为跑绿移除断言或只检查“无异常”。
 

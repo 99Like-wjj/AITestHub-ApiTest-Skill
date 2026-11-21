@@ -3,7 +3,7 @@ name: ath-api-regression
 description: 根据接口Markdown和明确需求范围，生成、细化或维护AITestHub原生API自动化用例，并在用户要求时发起平台调试、读取轨迹和提出修改建议。用于平台接口自动化资产生成与回归维护；真实接口、脚本和清理由平台Worker执行。
 license: MIT
 metadata:
-  version: "0.1.2"
+  version: "0.1.5"
 ---
 
 # AITestHub 接口测试
